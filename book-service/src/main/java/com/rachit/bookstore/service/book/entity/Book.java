@@ -2,6 +2,7 @@ package com.rachit.bookstore.service.book.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -20,18 +21,19 @@ public class Book {
 	private LocalDateTime publicationDate;
 	private String publishingHouse;
 	private List<String> tags;
+	private UUID isbn;
 
 	public Book() {
 	}
 
 	public Book(String title, List<String> authors, LocalDateTime publicationDate, String publishingHouse,
-			List<String> tags) {
+			List<String> tags, UUID isbn) {
 		this.title = title;
 		this.authors = authors;
 		this.publicationDate = publicationDate;
 		this.publishingHouse = publishingHouse;
 		this.tags = tags;
-
+		this.isbn = isbn;
 	}
 
 	@Id
@@ -88,4 +90,12 @@ public class Book {
 		this.tags = tags;
 	}
 
+	public UUID getIsbn() {
+		return isbn;
+	}
+	
+	public void setIsbn(UUID isbn) {
+		this.isbn = isbn;
+	}
+	
 }
