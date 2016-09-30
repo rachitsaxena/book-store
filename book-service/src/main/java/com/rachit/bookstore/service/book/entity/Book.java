@@ -11,6 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.rachit.bookstore.service.book.component.LocalDateTimeDeserializer;
+import com.rachit.bookstore.service.book.component.LocalDateTimeSerializer;
+
 
 @Entity
 public class Book {
@@ -18,6 +23,9 @@ public class Book {
 	private Long id;
 	private String title;
 	private List<String> authors;
+	
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime publicationDate;
 	private String publishingHouse;
 	private List<String> tags;

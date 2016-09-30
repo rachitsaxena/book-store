@@ -33,7 +33,7 @@ public class BookController {
 	public Book createBook(@RequestBody Book book) {
 		
 		Book b = repository.findByTitle(book.getTitle());
-		if(b != null) {
+		if(b != null && book.getId() == null) {
 			throw new RuntimeException("Book already exist");
 		}
 		BookEventType eventType = book.getId() == null ? BookEventType.BOOK_CREATE : BookEventType.BOOK_UPDATE;
