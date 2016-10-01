@@ -20,7 +20,7 @@ import com.rachit.bookstore.service.book.component.LocalDateTimeSerializer;
 @Entity
 public class Book {
 
-	private Long bookId;
+	private Long masterBookId;
 	private String title;
 	private List<String> authors;
 	
@@ -31,6 +31,7 @@ public class Book {
 	private List<String> tags;
 	private UUID isbn;
 	private Double retailPrice;
+	private String mongoBookId;
 
 	public Book() {
 	}
@@ -48,12 +49,12 @@ public class Book {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getBookId() {
-		return bookId;
+	public Long getMasterBookId() {
+		return masterBookId;
 	}
 
-	public void setBookId(Long bookId) {
-		this.bookId = bookId;
+	public void setMasterBookId(Long bookId) {
+		this.masterBookId = bookId;
 	}
 
 	public String getTitle() {
@@ -114,5 +115,13 @@ public class Book {
 	
 	public void setRetailPrice(Double retailPrice) {
 		this.retailPrice = retailPrice;
+	}
+	
+	public String getMongoBookId() {
+		return mongoBookId;
+	}
+	
+	public void setMongoBookId(String mongoBookId) {
+		this.mongoBookId = mongoBookId;
 	}
 }

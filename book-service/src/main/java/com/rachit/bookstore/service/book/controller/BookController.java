@@ -33,10 +33,10 @@ public class BookController {
 	public Book createBook(@RequestBody Book book) {
 		
 		Book b = repository.findByTitle(book.getTitle());
-		if(b != null && book.getBookId() == null) {
+		if(b != null && book.getMasterBookId() == null) {
 			throw new RuntimeException("Book already exist");
 		}
-		BookEventType eventType = book.getBookId() == null ? BookEventType.BOOK_CREATE : BookEventType.BOOK_UPDATE;
+		BookEventType eventType = book.getMasterBookId() == null ? BookEventType.BOOK_CREATE : BookEventType.BOOK_UPDATE;
 		
 		Book bookUpserted = repository.save(book);
 		producer.publishEvent(new BookEventMessage(bookUpserted, eventType));

@@ -16,10 +16,9 @@ import com.rachit.bookstore.service.search.component.LocalDateTimeSerializer;
 @Document(collection = "books")
 public class Book {
 
-	@Id
-	private String id;
-	/** Book ID from master record*/
-	private Long bookId;
+	@Id 
+	private String mongoBookId;
+	private Long masterBookId;
 	private String title;
 	
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -48,20 +47,20 @@ public class Book {
 		this.tags = tags;
 	}
 
-	public String getId() {
-		return id;
+	public String getMongoBookId() {
+		return mongoBookId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMongoBookId(String mongoBookId) {
+		this.mongoBookId = mongoBookId;
 	}
 	
-	public Long getBookId() {
-		return bookId;
+	public Long getMasterBookId() {
+		return masterBookId;
 	}
 	
-	public void setMasterRecordId(Long bookId) {
-		this.bookId = bookId;
+	public void setMasterBookId(Long masterBookId) {
+		this.masterBookId = masterBookId;
 	}
 
 	public String getTitle() {

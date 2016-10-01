@@ -21,6 +21,9 @@ public class BookMasterEntityConsumer {
 	private ObjectMapper mapper;
 	
 	@Autowired
+	private MongodbBookDetailsProducer mongoDetailsProducer;
+	
+	@Autowired
 	private BookRepository repository;
 
 	public BookMasterEntityConsumer() {
@@ -58,7 +61,12 @@ public class BookMasterEntityConsumer {
 	}
 
 	private void upsertBook(Book book) {
-		repository.save(book);
+		Book mongoBook = repository.save(book);
+		
+		MasterSyncBookDetails detail = new MasterSyncBookDetails(
+				mongoBook.getMasterBookId(), mongoBook.getMongoBookId());
+		
+		mongoDetailsProducer.publishEvent(detail);
 	}
 	
 }
