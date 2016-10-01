@@ -1,58 +1,66 @@
-package com.rachit.bookstore.service.book.entity;
+package com.rachit.bookstore.service.search.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.rachit.bookstore.service.book.component.LocalDateTimeDeserializer;
-import com.rachit.bookstore.service.book.component.LocalDateTimeSerializer;
+import com.rachit.bookstore.service.search.component.LocalDateTimeDeserializer;
+import com.rachit.bookstore.service.search.component.LocalDateTimeSerializer;
 
-
-@Entity
+@Document(collection = "books")
 public class Book {
 
+	@Id
+	private String id;
+	/** Book ID from master record*/
 	private Long bookId;
 	private String title;
-	private List<String> authors;
 	
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime publicationDate;
 	private String publishingHouse;
-	private List<String> tags;
+	
+	@Indexed
 	private UUID isbn;
 	private Double retailPrice;
-
+	
+	private List<String> authors;
+	private List<String> tags;
+	
 	public Book() {
 	}
-
-	public Book(String title, List<String> authors, LocalDateTime publicationDate, String publishingHouse,
-			List<String> tags, UUID isbn, Double retailPrice) {
+	
+	public Book(String title, LocalDateTime publicationDate, String publishingHouse, 
+			UUID isbn, Double retailPrice, List<String> authors, List<String> tags) {
 		this.title = title;
-		this.authors = authors;
 		this.publicationDate = publicationDate;
 		this.publishingHouse = publishingHouse;
-		this.tags = tags;
 		this.isbn = isbn;
 		this.retailPrice = retailPrice;
+		this.authors = authors;
+		this.tags = tags;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	public Long getBookId() {
 		return bookId;
 	}
-
-	public void setBookId(Long bookId) {
+	
+	public void setMasterRecordId(Long bookId) {
 		this.bookId = bookId;
 	}
 
@@ -62,16 +70,6 @@ public class Book {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	@ElementCollection
-	@CollectionTable(name = "authors")
-	public List<String> getAuthors() {
-		return authors;
-	}
-
-	public void setAuthors(List<String> authors) {
-		this.authors = authors;
 	}
 
 	public LocalDateTime getPublicationDate() {
@@ -90,8 +88,30 @@ public class Book {
 		this.publishingHouse = publishingHouse;
 	}
 
-	@ElementCollection
-	@CollectionTable(name = "tags")
+	public UUID getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(UUID isbn) {
+		this.isbn = isbn;
+	}
+
+	public Double getRetailPrice() {
+		return retailPrice;
+	}
+
+	public void setRetailPrice(Double retailPrice) {
+		this.retailPrice = retailPrice;
+	}
+
+	public List<String> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<String> authors) {
+		this.authors = authors;
+	}
+
 	public List<String> getTags() {
 		return tags;
 	}
@@ -99,20 +119,8 @@ public class Book {
 	public void setTags(List<String> tags) {
 		this.tags = tags;
 	}
-
-	public UUID getIsbn() {
-		return isbn;
-	}
 	
-	public void setIsbn(UUID isbn) {
-		this.isbn = isbn;
-	}
 	
-	public Double getRetailPrice() {
-		return retailPrice;
-	}
 	
-	public void setRetailPrice(Double retailPrice) {
-		this.retailPrice = retailPrice;
-	}
+	
 }

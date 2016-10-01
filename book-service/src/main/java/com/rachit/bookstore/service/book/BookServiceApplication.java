@@ -38,14 +38,14 @@ public class BookServiceApplication implements CommandLineRunner, RabbitListener
 	public void run(String... arg0) throws Exception {
 		repository.deleteAll();
 		repository.save(new Book("Hibernate Book", Arrays.asList("Rachit", "Saxena"),  LocalDateTime.now(), 
-				"Pramati", Arrays.asList("Hibernate", "Java"), UUID.randomUUID()));
+				"Pramati", Arrays.asList("Hibernate", "Java"), UUID.randomUUID(), 200.0));
 		
 		repository.save(new Book("Spring Book", Arrays.asList("Ritesh", "Prasad"), LocalDateTime.now().minusYears(1), 
-				"Imaginea", Arrays.asList("Spring", "Java"), UUID.randomUUID()));
+				"Imaginea", Arrays.asList("Spring", "Java"), UUID.randomUUID(), 150.0));
 		
 		repository.save(new Book("Spring Microservices", Arrays.asList("Rajesh", "Srikanth"), 
 				LocalDateTime.now().minusYears(1).minusMonths(6), "PackPub", 
-				Arrays.asList("Spring", "Cloud", "Microservices"), UUID.randomUUID()));
+				Arrays.asList("Spring", "Cloud", "Microservices"), UUID.randomUUID(), 500.0));
 	}
 
 	@Bean

@@ -1,41 +1,24 @@
-package com.rachit.bookstore.service.book.entity;
+package com.rachit.bookstore.service.search.messaging;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.rachit.bookstore.service.book.component.LocalDateTimeDeserializer;
-import com.rachit.bookstore.service.book.component.LocalDateTimeSerializer;
-
-
-@Entity
-public class Book {
-
-	private Long bookId;
+public class BookMasterEntity {
+	
+	private Long id;
 	private String title;
 	private List<String> authors;
-	
-	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime publicationDate;
 	private String publishingHouse;
 	private List<String> tags;
 	private UUID isbn;
 	private Double retailPrice;
-
-	public Book() {
+	
+	public BookMasterEntity() {
 	}
 
-	public Book(String title, List<String> authors, LocalDateTime publicationDate, String publishingHouse,
+	public BookMasterEntity(String title, List<String> authors, LocalDateTime publicationDate, String publishingHouse,
 			List<String> tags, UUID isbn, Double retailPrice) {
 		this.title = title;
 		this.authors = authors;
@@ -46,14 +29,12 @@ public class Book {
 		this.retailPrice = retailPrice;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getBookId() {
-		return bookId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setBookId(Long bookId) {
-		this.bookId = bookId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -64,8 +45,6 @@ public class Book {
 		this.title = title;
 	}
 
-	@ElementCollection
-	@CollectionTable(name = "authors")
 	public List<String> getAuthors() {
 		return authors;
 	}
@@ -90,8 +69,6 @@ public class Book {
 		this.publishingHouse = publishingHouse;
 	}
 
-	@ElementCollection
-	@CollectionTable(name = "tags")
 	public List<String> getTags() {
 		return tags;
 	}
