@@ -1,4 +1,4 @@
-package com.rachit.bookstore.service.profile.entity;
+package com.rachit.bookstore.service.inventory.proxy.profile;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
@@ -39,10 +39,4 @@ public enum UserType {
 		}
 		throw new RuntimeException("Invalid UserType value : "+value);
 	}
-	
-
-	
-	
-	
-	
 }
