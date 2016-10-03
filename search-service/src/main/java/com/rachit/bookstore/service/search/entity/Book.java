@@ -32,6 +32,7 @@ public class Book {
 	
 	private List<String> authors;
 	private List<String> tags;
+	private List<Inventory> inventories;
 	
 	public Book() {
 	}
@@ -119,7 +120,12 @@ public class Book {
 		this.tags = tags;
 	}
 	
+	public List<Inventory> getInventories() {
+		return inventories;
+	}
 	
-	
+	public void setInventories(List<Inventory> inventories) {
+		this.inventories = inventories;
+	}
 	
 }

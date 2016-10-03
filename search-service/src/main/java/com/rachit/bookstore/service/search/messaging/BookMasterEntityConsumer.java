@@ -50,12 +50,12 @@ public class BookMasterEntityConsumer {
 		}
 
 		switch (eventMsg.getEventType()) {
-		case BOOK_CREATE:
-		case BOOK_UPDATE:
+		case CREATE:
+		case UPDATE:
 			upsertBook(eventMsg.getBook());
 			break;
 
-		case BOOK_DELETE:
+		case DELETE:
 			break;
 		}
 	}

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rachit.bookstore.service.inventory.entity.Inventory;
+import com.rachit.bookstore.service.inventory.messaging.EventType;
+import com.rachit.bookstore.service.inventory.messaging.InventoryToSearchUpdateEvent;
+import com.rachit.bookstore.service.inventory.messaging.InventoryUpdatesProducer;
 import com.rachit.bookstore.service.inventory.proxy.book.BookServiceProxy;
 import com.rachit.bookstore.service.inventory.proxy.profile.ProfileServiceProxy;
 import com.rachit.bookstore.service.inventory.proxy.profile.User;
@@ -25,15 +28,17 @@ public class InventoryController {
 	private InventoryRepository repository;
 	private BookServiceProxy bookServiceProxy;
 	private ProfileServiceProxy profileServiceProxy;
+	private InventoryUpdatesProducer inventoryUpdatesProducer;
 	
 	@Autowired
 	public InventoryController(InventoryRepository repository,
 			BookServiceProxy bookServiceProxy,
-			ProfileServiceProxy profileServiceProxy) {
+			ProfileServiceProxy profileServiceProxy,
+			InventoryUpdatesProducer inventoryUpdatesProducer) {
 		this.repository = repository;
 		this.bookServiceProxy = bookServiceProxy;
 		this.profileServiceProxy = profileServiceProxy;
-		
+		this.inventoryUpdatesProducer = inventoryUpdatesProducer;
 	}
 	
 	@RequestMapping(value = "/inventory/sellerId/{sellerId}", method = RequestMethod.GET)
@@ -55,7 +60,12 @@ public class InventoryController {
 		inventory.setIsbn(isbn);
 		inventory.setSellerId(sellerId);
 		
-		return repository.save(inventory);
+		EventType eventType = (inventory.getId() == null || inventory.getId() == 0) ? EventType.CREATE : EventType.UPDATE;
+		Inventory inv = repository.save(inventory);
+
+		inventoryUpdatesProducer.publishEvent(new InventoryToSearchUpdateEvent(eventType, inv));
+		
+		return inv;
 	}
 
 	private boolean isValidSeller(Long sellerId) {

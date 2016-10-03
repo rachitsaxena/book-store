@@ -4,10 +4,10 @@ import com.rachit.bookstore.service.book.entity.Book;
 
 public class BookEventMessage {
 	
-	private BookEventType eventType;
+	private EventType eventType;
 	private Book book;
 	
-	public BookEventMessage(Book book, BookEventType eventType) {
+	public BookEventMessage(Book book, EventType eventType) {
 		this.book = book;
 		this.eventType = eventType;
 	}
@@ -20,11 +20,11 @@ public class BookEventMessage {
 		this.book = book;
 	}
 	
-	public BookEventType getEventType() {
+	public EventType getEventType() {
 		return eventType;
 	}
 	
-	public void setEventType(BookEventType eventType) {
+	public void setEventType(EventType eventType) {
 		this.eventType = eventType;
 	}
 }

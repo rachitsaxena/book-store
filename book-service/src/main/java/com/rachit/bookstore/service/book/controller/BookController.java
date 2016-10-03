@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rachit.bookstore.service.book.entity.Book;
 import com.rachit.bookstore.service.book.messaging.BookEventMessage;
-import com.rachit.bookstore.service.book.messaging.BookEventType;
+import com.rachit.bookstore.service.book.messaging.EventType;
 import com.rachit.bookstore.service.book.messaging.MessageProducer;
 import com.rachit.bookstore.service.book.repository.BookRepository;
 
@@ -36,7 +36,7 @@ public class BookController {
 		if(b != null && book.getMasterBookId() == null) {
 			throw new RuntimeException("Book already exist");
 		}
-		BookEventType eventType = book.getMasterBookId() == null ? BookEventType.BOOK_CREATE : BookEventType.BOOK_UPDATE;
+		EventType eventType = book.getMasterBookId() == null ? EventType.CREATE : EventType.UPDATE;
 		
 		Book bookUpserted = repository.save(book);
 		producer.publishEvent(new BookEventMessage(bookUpserted, eventType));
@@ -62,7 +62,7 @@ public class BookController {
 		Book book = new Book();
 		book.setIsbn(b.getIsbn());
 		
-		producer.publishEvent(new BookEventMessage(book, BookEventType.BOOK_DELETE));
+		producer.publishEvent(new BookEventMessage(book, EventType.DELETE));
 	}
 	
 	@RequestMapping(value = "/isbn/{isbn}", method = RequestMethod.GET)
