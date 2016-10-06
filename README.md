@@ -13,11 +13,11 @@ The aim of this application is not to provide complete working solution as onlin
 
 - Spring Boot
 - Spring Cloud 
--- Eureka - Service Registry and Discovery
--- Cloud Config server - Externalizing Service Configurations
--- Ribbon - Client side Load Balancer
--- Fiegn - Proxy interfaces for remote calls.
--- Sprin cloud Stream - Even Driven Microservices with Kafka messaging.
+  - Eureka - Service Registry and Discovery
+  - Cloud Config server - Externalizing Service Configurations
+  - Ribbon - Client side Load Balancer
+  - Fiegn - Proxy interfaces for remote calls.
+  - Sprin cloud Stream - Even Driven Microservices with Kafka messaging.
 - RabbitMQ
 - MongoDB 
 - H2
