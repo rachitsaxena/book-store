@@ -6,4 +6,5 @@ import com.rachit.bookstore.service.inventory.entity.Inventory;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 
+	
 }

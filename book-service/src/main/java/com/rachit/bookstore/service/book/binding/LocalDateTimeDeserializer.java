@@ -1,4 +1,4 @@
-package com.rachit.bookstore.service.book.component;
+package com.rachit.bookstore.service.book.binding;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

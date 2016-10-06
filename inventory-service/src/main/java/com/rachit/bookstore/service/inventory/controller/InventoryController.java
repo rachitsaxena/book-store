@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rachit.bookstore.service.inventory.entity.Inventory;
 import com.rachit.bookstore.service.inventory.messaging.EventType;
-import com.rachit.bookstore.service.inventory.messaging.InventoryToSearchUpdateEvent;
-import com.rachit.bookstore.service.inventory.messaging.InventoryUpdatesProducer;
+import com.rachit.bookstore.service.inventory.messaging.producer.InventoryToSearchUpdateEvent;
+import com.rachit.bookstore.service.inventory.messaging.producer.InventoryUpdatesProducer;
 import com.rachit.bookstore.service.inventory.proxy.book.BookServiceProxy;
 import com.rachit.bookstore.service.inventory.proxy.profile.ProfileServiceProxy;
 import com.rachit.bookstore.service.inventory.proxy.profile.User;
@@ -82,7 +82,7 @@ public class InventoryController {
 		return bookServiceProxy.findBookByIsbn(isbn) != null;
 	}
 
-	@RequestMapping(value = "/inventory/sellerId/{sellerId}/isbn/{isbn}", method = RequestMethod.GET)
+	@RequestMapping(value = "/sellerId/{sellerId}/isbn/{isbn}", method = RequestMethod.GET)
 	public Inventory getInventory(@PathVariable("sellerId")Long sellerId, @PathVariable("isbn") UUID isbn) {
 		Inventory critera = new Inventory();
 		critera.setSellerId(sellerId);

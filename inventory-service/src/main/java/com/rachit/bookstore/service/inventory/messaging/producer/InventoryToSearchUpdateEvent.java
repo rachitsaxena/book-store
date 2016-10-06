@@ -1,6 +1,7 @@
-package com.rachit.bookstore.service.inventory.messaging;
+package com.rachit.bookstore.service.inventory.messaging.producer;
 
 import com.rachit.bookstore.service.inventory.entity.Inventory;
+import com.rachit.bookstore.service.inventory.messaging.EventType;
 
 public class InventoryToSearchUpdateEvent {
 

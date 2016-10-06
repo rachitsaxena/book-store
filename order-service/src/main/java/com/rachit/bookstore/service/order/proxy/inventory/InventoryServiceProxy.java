@@ -1,4 +1,4 @@
-package com.rachit.bookstore.service.inventory.proxy.book;
+package com.rachit.bookstore.service.order.proxy.inventory;
 
 import java.util.UUID;
 
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**This should be name of service that can be looked up in Eureka*/
-@FeignClient(name = "book-service") 
+@FeignClient("inventory-service")
 @RibbonClient
-public interface BookServiceProxy {
+public interface InventoryServiceProxy {
 
-	@RequestMapping(value = "/books/isbn/{isbn}", method = RequestMethod.GET)
-	public Book findBookByIsbn(@PathVariable("isbn") UUID isbn);
+	@RequestMapping(value = "/inventory/sellerId/{sellerId}/isbn/{isbn}", method = RequestMethod.GET)
+	public Inventory getInventory(@PathVariable("sellerId")Long sellerId, @PathVariable("isbn") UUID isbn);
+
 }

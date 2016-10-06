@@ -13,8 +13,8 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.rachit.bookstore.service.book.component.LocalDateTimeDeserializer;
-import com.rachit.bookstore.service.book.component.LocalDateTimeSerializer;
+import com.rachit.bookstore.service.book.binding.LocalDateTimeDeserializer;
+import com.rachit.bookstore.service.book.binding.LocalDateTimeSerializer;
 
 
 @Entity
