@@ -12,9 +12,14 @@ Book Store is an application developed as a POC using Spring boot based microser
 The aim of this application is not to provide complete working solution as online retail stores. Instead the aim of cover different features offered by Spring Boot and Spring Cloud. The tech stack used to develop these microservices are as following:
 
 - Spring Boot
-- Spring Cloud (Eureka, Cloud Config server, API Gateway (Zuul), Load Balancer
+- Spring Cloud 
+-- Eureka - Service Registry and Discovery
+-- Cloud Config server - Externalizing Service Configurations
+-- Ribbon - Client side Load Balancer
+-- Fiegn - Proxy interfaces for remote calls.
+-- Sprin cloud Stream - Even Driven Microservices with Kafka messaging.
 - RabbitMQ
-- MongoDB
+- MongoDB 
 - H2
 - More to be added 
 
