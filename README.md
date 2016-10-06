@@ -18,5 +18,14 @@ The aim of this application is not to provide complete working solution as onlin
 - H2
 - More to be added 
 
+
+## Port Information
+- search-service : 8005
+- book-service : 8080
+- inventory-service : 9501
+- profile-service : 9010
+- order-service : 8011
+
+
 This POC is still a work in progress and will be completed soon..
 
