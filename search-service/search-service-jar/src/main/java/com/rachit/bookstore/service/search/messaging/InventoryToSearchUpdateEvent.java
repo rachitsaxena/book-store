@@ -1,5 +1,6 @@
 package com.rachit.bookstore.service.search.messaging;
 
+import com.rachit.bookstore.commons.enums.EventType;
 import com.rachit.bookstore.service.search.entity.Inventory;
 
 public class InventoryToSearchUpdateEvent {

@@ -1,4 +1,4 @@
-package com.rachit.bookstore.service.search.messaging;
+package com.rachit.bookstore.service.search.entity.messaging;
 
 public class MasterSyncBookDetails {
 

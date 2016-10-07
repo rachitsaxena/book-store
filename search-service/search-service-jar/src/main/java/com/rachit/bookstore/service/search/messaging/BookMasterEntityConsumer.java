@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rachit.bookstore.service.search.entity.Book;
+import com.rachit.bookstore.service.search.entity.messaging.MasterSyncBookDetails;
 import com.rachit.bookstore.service.search.repository.BookRepository;
 
 @Component
