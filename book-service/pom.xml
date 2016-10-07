@@ -6,7 +6,7 @@
 	<groupId>com.rachit.bookstore</groupId>
 	<artifactId>book-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>book-service</name>
 	<description>Book Service</description>
@@ -24,6 +24,10 @@
 		<java.version>1.8</java.version>
 	</properties>
 	
+	<modules>
+		<module>book-service-entities</module>
+		<module>book-service-jar</module>
+	</modules>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -95,14 +99,5 @@
 		</dependency>
 
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
