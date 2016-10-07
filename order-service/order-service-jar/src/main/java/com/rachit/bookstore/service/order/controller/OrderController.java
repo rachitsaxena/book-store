@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rachit.bookstore.commons.enums.EventType;
 import com.rachit.bookstore.service.order.controller.request.OrderQuery;
 import com.rachit.bookstore.service.order.entity.Order;
-import com.rachit.bookstore.service.order.messaging.EventType;
-import com.rachit.bookstore.service.order.messaging.OrderEvent;
+import com.rachit.bookstore.service.order.entity.messaging.OrderEvent;
 import com.rachit.bookstore.service.order.messaging.OrderEventPublisher;
 import com.rachit.bookstore.service.order.repository.OrderRepository;
 

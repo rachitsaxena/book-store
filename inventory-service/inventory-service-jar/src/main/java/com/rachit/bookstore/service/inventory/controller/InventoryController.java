@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rachit.bookstore.commons.enums.EventType;
 import com.rachit.bookstore.service.inventory.entity.Inventory;
-import com.rachit.bookstore.service.inventory.messaging.EventType;
-import com.rachit.bookstore.service.inventory.messaging.producer.InventoryToSearchUpdateEvent;
-import com.rachit.bookstore.service.inventory.messaging.producer.InventoryUpdatesProducer;
+import com.rachit.bookstore.service.inventory.producer.InventoryToSearchUpdateEvent;
+import com.rachit.bookstore.service.inventory.producer.InventoryUpdatesProducer;
 import com.rachit.bookstore.service.inventory.proxy.book.BookServiceProxy;
 import com.rachit.bookstore.service.inventory.proxy.profile.ProfileServiceProxy;
 import com.rachit.bookstore.service.inventory.proxy.profile.User;

@@ -1,4 +1,4 @@
-package com.rachit.bookstore.service.inventory.messaging.consumer;
+package com.rachit.bookstore.service.inventory.consumer;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -15,11 +15,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.rachit.bookstore.commons.enums.EventType;
 import com.rachit.bookstore.service.inventory.entity.Inventory;
 import com.rachit.bookstore.service.inventory.entity.Sku;
-import com.rachit.bookstore.service.inventory.messaging.EventType;
-import com.rachit.bookstore.service.inventory.messaging.Order;
 import com.rachit.bookstore.service.inventory.repository.InventoryRepository;
+import com.rachit.bookstore.service.order.entity.Order;
+import com.rachit.bookstore.service.order.entity.messaging.OrderEvent;
 
 @Component
 @EnableBinding(Sink.class)

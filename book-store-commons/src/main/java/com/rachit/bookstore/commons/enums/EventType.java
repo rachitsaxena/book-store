@@ -1,4 +1,4 @@
-package com.rachit.bookstore.service.inventory.messaging;
+package com.rachit.bookstore.commons.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

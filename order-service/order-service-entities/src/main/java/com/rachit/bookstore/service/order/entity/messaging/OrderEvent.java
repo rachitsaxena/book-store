@@ -1,5 +1,6 @@
-package com.rachit.bookstore.service.order.messaging;
+package com.rachit.bookstore.service.order.entity.messaging;
 
+import com.rachit.bookstore.commons.enums.EventType;
 import com.rachit.bookstore.service.order.entity.Order;
 
 public class OrderEvent {

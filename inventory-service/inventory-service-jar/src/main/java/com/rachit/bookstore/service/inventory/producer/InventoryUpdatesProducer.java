@@ -1,4 +1,4 @@
-package com.rachit.bookstore.service.inventory.messaging.producer;
+package com.rachit.bookstore.service.inventory.producer;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;

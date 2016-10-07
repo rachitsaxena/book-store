@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.rachit.bookstore</groupId>
+	<artifactId>book-store</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>book-store</name>
+
+	<modules>
+		<module>book-service</module>
+		<module>book-store-commons</module>
+		<module>config-server</module>
+		<module>eureka-server</module>
+		<module>inventory-service</module>
+		<module>logistic-service</module>
+		<module>notification-service</module>
+		<module>order-service</module>
+		<module>profile-service</module>
+		<module>review-service</module>
+		<module>search-service</module>
+	</modules>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.1.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+
+</project>

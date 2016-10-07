@@ -1,22 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>order-service-entities</artifactId>
-	<name>order-service-entities</name>
+	<groupId>com.rachit.bookstore</groupId>
+	<artifactId>book-store-commons</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	
+
 	<parent>
 		<groupId>com.rachit.bookstore</groupId>
-		<artifactId>order-service</artifactId>
+		<artifactId>book-store</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../</relativePath> <!-- lookup parent from repository -->
 	</parent>
-	
+
 	<dependencies>
 		<dependency>
-			<groupId>com.rachit.bookstore</groupId>
-			<artifactId>book-store-commons</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.8.3</version>
 		</dependency>
 	</dependencies>
-	
+
+
 </project>
