@@ -2,6 +2,8 @@ package com.rachit.bookstore.service.profile.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import com.rachit.bookstore.service.profile.repository.UserRepository;
 public class UserController {
 
 	private UserRepository repository;
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	public UserController(UserRepository repository) {
@@ -30,12 +33,18 @@ public class UserController {
 	
 	@RequestMapping(value = "/userId/{userId}", method = RequestMethod.GET)
 	public User findByUserId(@PathVariable ("userId") Long userId) {
-		return repository.findOne(userId);
+		LOGGER.info("Getting User by id: "+userId);
+		User user = repository.findOne(userId);
+		
+		LOGGER.info("Returning User by id :"+userId +" User :"+user);
+		
+		return user;
 	}
 	
 	@RequestMapping(value = "/upsert", method = RequestMethod.POST)
-	public User findByUserId(@RequestBody User user) {
+	public User upsertUser(@RequestBody User user) {
 		if(user.getUserType() == null ) {
+			LOGGER.error("UserType cannot be null");
 			throw new RuntimeException("UserType is requried.");
 		}
 		return repository.save(user);

@@ -3,6 +3,8 @@ package com.rachit.bookstore.service.order.controller;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,8 @@ public class OrderValidator {
 	private ProfileServiceProxy profileService;
 	private InventoryServiceProxy inventoryService;
 	private BookServiceProxy bookService;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderValidator.class);
 	
 	@Autowired
 	public OrderValidator(ProfileServiceProxy profileServiceProxy,
@@ -45,40 +49,56 @@ public class OrderValidator {
 		if(sellerId == null || sellerId == 0 
 			|| buyerId == null || buyerId == 0 
 			|| isbn == null) {
-			throw new RuntimeException("Order must contain Seller, Buyer and ISBN information");
+			String msg = "Order must contain Seller, Buyer and ISBN information";
+			LOGGER.error(msg);
+			throw new RuntimeException(msg);
 		}
 		
 		User seller = profileService.findByUserId(sellerId);
 		if(seller == null ) {
-			throw new RuntimeException("Invalid Seller [SellerId:"+sellerId+"]");
+			String msg = "Invalid Seller [SellerId:"+sellerId+"]";
+			LOGGER.error(msg);
+			throw new RuntimeException(msg);
 		}
 		
 		User buyer = profileService.findByUserId(buyerId);
 		if(buyer == null ) {
-			throw new RuntimeException("Invalid Buyer [BuyerId:"+buyerId+"]");
+			String msg = "Invalid Buyer [BuyerId:"+buyerId+"]";
+			LOGGER.error(msg);
+			throw new RuntimeException(msg);
 		}
 		
 		if(buyer.getAddresses() == null || buyer.getAddresses().isEmpty()) {
-			throw new RuntimeException("Buyer has no delivery address information [BuyerId:"+buyerId+"]");
+			String msg = "Buyer has no delivery address information [BuyerId:"+buyerId+"]";
+			LOGGER.error(msg);
+			throw new RuntimeException(msg);
 		}
 		
 		Book book = bookService.findBookByIsbn(isbn);
 		if(book == null) {
-			throw new RuntimeException("Invalid Book ISBN [ISBN:"+isbn+"]");
+			String msg = "Invalid Book ISBN [ISBN:"+isbn+"]";
+			LOGGER.error(msg);
+			throw new RuntimeException(msg);
 		}
 		
 		Inventory inventory = inventoryService.getInventory(sellerId, isbn);
 		if(inventory == null || inventory.getSkus() == null || inventory.getSkus().isEmpty()) {
-			throw new RuntimeException("Seller do not have sufficient stock. [Inventory Empty]");
+			String msg = "Seller do not have sufficient stock. [Inventory Empty]";
+			LOGGER.error(msg);
+			throw new RuntimeException(msg);
 		}
 		
 		Optional<Sku> opSku = inventory.getSkus().stream().filter(sku -> sku.getFormat() == type).findFirst();
 		if(!opSku.isPresent()) {
-			throw new RuntimeException("Seller do not have book in "+type+" format.");
+			String msg = "Seller do not have book in "+type+" format.";
+			LOGGER.error(msg);
+			throw new RuntimeException(msg);
 		}else {
 			Sku sku = opSku.get();
 			if(sku.getAvailableQuantity() < 1) {
-				throw new RuntimeException("Seller do not have book in "+type+" format. [Stock not available]");
+				String msg = "Seller do not have book in "+type+" format. [Stock not available]";
+				LOGGER.error(msg);
+				throw new RuntimeException(msg);
 			}
 		}
 	}

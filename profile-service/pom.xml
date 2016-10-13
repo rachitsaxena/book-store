@@ -22,14 +22,15 @@
 		<module>profile-service-entities</module>
 		<module>profile-service-jar</module>
 	</modules>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<logback.version>1.1.6</logback.version>
 	</properties>
-	
-	
+
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -65,7 +66,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- ======== Spring Cloud dependencies ======== -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -91,12 +92,19 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-		
+
 		<!-- ======== H2 dependencies ======== -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<!-- ======== Other dependencies ======== -->
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>4.7</version>
 		</dependency>
 
 	</dependencies>

@@ -2,6 +2,8 @@ package com.rachit.bookstore.service.order.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +24,10 @@ public class OrderController {
 
 	private OrderRepository orderRepository;
 	private OrderValidator orderValidator;
-	private OrderEventPublisher publisher; 
+	private OrderEventPublisher publisher;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
+	
 	@Autowired
 	public OrderController(OrderRepository orderRepository, OrderValidator validator, OrderEventPublisher publisher) {
 		this.orderRepository = orderRepository;
@@ -32,6 +37,7 @@ public class OrderController {
 	
 	@RequestMapping(value = "/upsert", method = RequestMethod.POST)
 	public Order upsertOrder(@RequestBody Order order) {
+		LOGGER.info("Order upsert request : "+order);
 		orderValidator.validateOrder(order);
 		
 		EventType eventType = (order.getId() == null || order.getId() == 0) ? EventType.CREATE : EventType.UPDATE;
@@ -50,12 +56,6 @@ public class OrderController {
 	@RequestMapping(value = "/Buyer/sellerId/{sellerId}", method = RequestMethod.PUT)
 	public List<Order> findOrdersBySellerId(@PathVariable("sellerId") Long sellerId, @RequestBody OrderQuery orderQuery) {
 		return null;
-	}
-	
-	@RequestMapping(value = "/kafka", method = RequestMethod.GET)
-	public Boolean testKafka() {
-		publisher.publishEvent(new OrderEvent(new Order(), EventType.CREATE));
-		return Boolean.TRUE;
 	}
 	
 }

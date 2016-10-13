@@ -3,6 +3,8 @@ package com.rachit.bookstore.service.inventory.controller;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +31,8 @@ public class InventoryController {
 	private BookServiceProxy bookServiceProxy;
 	private ProfileServiceProxy profileServiceProxy;
 	private InventoryUpdatesProducer inventoryUpdatesProducer;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(InventoryController.class);
 	
 	@Autowired
 	public InventoryController(InventoryRepository repository,
@@ -84,6 +88,7 @@ public class InventoryController {
 
 	@RequestMapping(value = "/sellerId/{sellerId}/isbn/{isbn}", method = RequestMethod.GET)
 	public Inventory getInventory(@PathVariable("sellerId")Long sellerId, @PathVariable("isbn") UUID isbn) {
+		LOGGER.info("Finding inventory for SellerId: "+sellerId+" and ISBN: "+isbn);
 		Inventory critera = new Inventory();
 		critera.setSellerId(sellerId);
 		critera.setIsbn(isbn);
