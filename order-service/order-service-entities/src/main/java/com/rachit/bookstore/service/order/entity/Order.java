@@ -21,12 +21,7 @@ public class Order {
 	private Long sellerId;
 	private Long buyerId;
 	
-	//@JsonSerialize(using = LocalDateTimeSerializer.class)
-	//@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalTime orderPlacedOn;
-	
-	//@JsonSerialize(using = LocalDateTimeSerializer.class)
-	//@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalTime deliveryTargetedOn;
 	
 	private UUID isbn;

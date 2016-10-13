@@ -10,30 +10,30 @@ import org.springframework.stereotype.Component;
 
 import com.rachit.bookstore.service.order.entity.BookType;
 import com.rachit.bookstore.service.order.entity.Order;
-import com.rachit.bookstore.service.order.proxy.book.Book;
-import com.rachit.bookstore.service.order.proxy.book.BookServiceProxy;
-import com.rachit.bookstore.service.order.proxy.inventory.Inventory;
-import com.rachit.bookstore.service.order.proxy.inventory.InventoryServiceProxy;
-import com.rachit.bookstore.service.order.proxy.inventory.Sku;
-import com.rachit.bookstore.service.order.proxy.profile.ProfileServiceProxy;
-import com.rachit.bookstore.service.order.proxy.profile.User;
+import com.rachit.bookstore.service.book.entity.Book;
+import com.rachit.bookstore.service.inventory.entity.Inventory;
+import com.rachit.bookstore.service.inventory.entity.Sku;
+import com.rachit.bookstore.service.order.services.BookService;
+import com.rachit.bookstore.service.order.services.InventoryService;
+import com.rachit.bookstore.service.order.services.ProfileService;
+import com.rachit.bookstore.service.profile.entity.User;
 
 @Component
 public class OrderValidator {
 
-	private ProfileServiceProxy profileService;
-	private InventoryServiceProxy inventoryService;
-	private BookServiceProxy bookService;
+	private ProfileService profileService;
+	private InventoryService inventoryService;
+	private BookService bookService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrderValidator.class);
 	
 	@Autowired
-	public OrderValidator(ProfileServiceProxy profileServiceProxy,
-			InventoryServiceProxy inventoryServiceProxy,
-			BookServiceProxy bookServiceProxy) {
-		this.profileService = profileServiceProxy;
-		this.inventoryService = inventoryServiceProxy;
-		this.bookService = bookServiceProxy;
+	public OrderValidator(ProfileService profileService,
+			InventoryService inventoryService,
+			BookService bookService) {
+		this.profileService = profileService;
+		this.inventoryService = inventoryService;
+		this.bookService = bookService;
 	}
 	
 	/**
@@ -44,7 +44,6 @@ public class OrderValidator {
 		Long sellerId = order.getSellerId();
 		Long buyerId = order.getBuyerId();
 		UUID isbn = order.getIsbn();
-		BookType type = order.getBookType();
 		
 		if(sellerId == null || sellerId == 0 
 			|| buyerId == null || buyerId == 0 
@@ -55,15 +54,17 @@ public class OrderValidator {
 		}
 		
 		User seller = profileService.findByUserId(sellerId);
-		if(seller == null ) {
-			String msg = "Invalid Seller [SellerId:"+sellerId+"]";
+		if(seller == null || seller.getId() <= 0) {
+			String msg = "Either Seller is Invalid or Seller details not available at "
+					+ "the moment. Select a different Seller. [SellerId:"+sellerId+"]";
 			LOGGER.error(msg);
 			throw new RuntimeException(msg);
 		}
 		
 		User buyer = profileService.findByUserId(buyerId);
-		if(buyer == null ) {
-			String msg = "Invalid Buyer [BuyerId:"+buyerId+"]";
+		if(buyer == null || buyer.getId() <= 0) {
+			String msg = "Either Buyer details are Invalid or details are not available at "
+					+ "the moment. Please try again later. [BuyerId:"+buyerId+"]";
 			LOGGER.error(msg);
 			throw new RuntimeException(msg);
 		}
@@ -75,28 +76,29 @@ public class OrderValidator {
 		}
 		
 		Book book = bookService.findBookByIsbn(isbn);
-		if(book == null) {
-			String msg = "Invalid Book ISBN [ISBN:"+isbn+"]";
+		if(book == null || book.getMasterBookId() <= 0) {
+			String msg = "Invalid Book or Book Details not available at the moment. "
+					+ "Please try again later. ISBN [ISBN:"+isbn+"]";
 			LOGGER.error(msg);
 			throw new RuntimeException(msg);
 		}
 		
 		Inventory inventory = inventoryService.getInventory(sellerId, isbn);
-		if(inventory == null || inventory.getSkus() == null || inventory.getSkus().isEmpty()) {
-			String msg = "Seller do not have sufficient stock. [Inventory Empty]";
+		if(inventory == null || inventory.getId() <= 0 || inventory.getSkus() == null || inventory.getSkus().isEmpty()) {
+			String msg = "Inventory Information not available or Seller do not have sufficient stock. [Inventory Empty]";
 			LOGGER.error(msg);
 			throw new RuntimeException(msg);
 		}
 		
-		Optional<Sku> opSku = inventory.getSkus().stream().filter(sku -> sku.getFormat() == type).findFirst();
+		Optional<Sku> opSku = inventory.getSkus().stream().filter(sku -> BookType.fromValue(sku.getFormat().getValue()) == order.getBookType()).findFirst();
 		if(!opSku.isPresent()) {
-			String msg = "Seller do not have book in "+type+" format.";
+			String msg = "Seller do not have book in "+order.getBookType()+" format.";
 			LOGGER.error(msg);
 			throw new RuntimeException(msg);
 		}else {
 			Sku sku = opSku.get();
 			if(sku.getAvailableQuantity() < 1) {
-				String msg = "Seller do not have book in "+type+" format. [Stock not available]";
+				String msg = "Seller do not have book in "+order.getBookType()+" format. [Stock not available]";
 				LOGGER.error(msg);
 				throw new RuntimeException(msg);
 			}

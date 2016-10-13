@@ -28,6 +28,21 @@
 			<artifactId>order-service-entities</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.rachit.bookstore</groupId>
+			<artifactId>book-service-entities</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.rachit.bookstore</groupId>
+			<artifactId>inventory-service-entities</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.rachit.bookstore</groupId>
+			<artifactId>profile-service-entities</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 
 
