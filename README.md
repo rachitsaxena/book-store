@@ -51,5 +51,4 @@ The aim of this application is not to provide complete working solution as onlin
   - 127.0.0.1       orderservicelocal
   - 127.0.0.1       searchservicelocal
 
-This POC is still a work in progress..
 
