@@ -17,6 +17,7 @@ The aim of this application is not to provide complete working solution as onlin
   - Cloud Config server - Externalizing Service Configurations
   - Ribbon - Client side Load Balancer
   - Fiegn - Proxy interfaces for remote calls.
+  - Hystrix - Hystrix and Hystrix Dashboard
   - Spring cloud Stream - Even Driven Microservices with Kafka messaging.
   - Spring Sleuth - Enable Trace and Span IDs for Centralised Logging
 - Centralised Logging (12-Factor requirement) using ELK (ElasticSearch, Logstash and Kibana)
@@ -28,10 +29,12 @@ The aim of this application is not to provide complete working solution as onlin
 
 ## Port Information
 - search-service : 8005
+- order-service : 8011
 - book-service : 8080
 - inventory-service : 9501
 - profile-service : 9010
-- order-service : 8011
+- hystrix-dashboard : 9020
+
 
 
 This POC is still a work in progress and will be completed soon..
