@@ -18,6 +18,7 @@ The aim of this application is not to provide complete working solution as onlin
   - Ribbon - Client side Load Balancer
   - Fiegn - Proxy interfaces for remote calls.
   - Sprin cloud Stream - Even Driven Microservices with Kafka messaging.
+- Centralised Logging (12-Factor requirement) using ELK (ElasticSearch, Logstash and Kibana)
 - RabbitMQ
 - MongoDB 
 - H2
