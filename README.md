@@ -26,6 +26,14 @@ The aim of this application is not to provide complete working solution as onlin
 - H2
 - More to be added 
 
+## Before starting services, start following components:
+- Zookeeper
+- Kafka
+- RabbitMQ
+- MongoDB
+- Logstash
+- ElasticSearch
+- Kibana
 
 ## Port Information
 - search-service : 8005
@@ -35,7 +43,13 @@ The aim of this application is not to provide complete working solution as onlin
 - profile-service : 9010
 - hystrix-dashboard : 9020
 
+## To run these applications
+- Following entries are added to /etc/hosts. These entries are required when running services on local. Turnbine has limitation of one hostname per service.
+  - 127.0.0.1       bookservicelocal
+  - 127.0.0.1       inventoryservicelocal
+  - 127.0.0.1       profileservicelocal
+  - 127.0.0.1       orderservicelocal
+  - 127.0.0.1       searchservicelocal
 
-
-This POC is still a work in progress and will be completed soon..
+This POC is still a work in progress..
 
