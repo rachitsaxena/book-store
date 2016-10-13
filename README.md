@@ -17,7 +17,8 @@ The aim of this application is not to provide complete working solution as onlin
   - Cloud Config server - Externalizing Service Configurations
   - Ribbon - Client side Load Balancer
   - Fiegn - Proxy interfaces for remote calls.
-  - Sprin cloud Stream - Even Driven Microservices with Kafka messaging.
+  - Spring cloud Stream - Even Driven Microservices with Kafka messaging.
+  - Spring Sleuth - Enable Trace and Span IDs for Centralised Logging
 - Centralised Logging (12-Factor requirement) using ELK (ElasticSearch, Logstash and Kibana)
 - RabbitMQ
 - MongoDB 
