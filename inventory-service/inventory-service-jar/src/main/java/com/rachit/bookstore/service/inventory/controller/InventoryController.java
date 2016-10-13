@@ -14,34 +14,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rachit.bookstore.commons.enums.EventType;
+import com.rachit.bookstore.service.book.entity.Book;
 import com.rachit.bookstore.service.inventory.entity.Inventory;
 import com.rachit.bookstore.service.inventory.producer.InventoryToSearchUpdateEvent;
 import com.rachit.bookstore.service.inventory.producer.InventoryUpdatesProducer;
-import com.rachit.bookstore.service.inventory.proxy.book.BookServiceProxy;
-import com.rachit.bookstore.service.inventory.proxy.profile.ProfileServiceProxy;
-import com.rachit.bookstore.service.inventory.proxy.profile.User;
-import com.rachit.bookstore.service.inventory.proxy.profile.UserType;
 import com.rachit.bookstore.service.inventory.repository.InventoryRepository;
+import com.rachit.bookstore.service.inventory.service.BookService;
+import com.rachit.bookstore.service.inventory.service.ProfileService;
+import com.rachit.bookstore.service.profile.entity.User;
+import com.rachit.bookstore.service.profile.entity.UserType;
 
 @RestController
 @RequestMapping(value = "/inventory")
 public class InventoryController {
 
 	private InventoryRepository repository;
-	private BookServiceProxy bookServiceProxy;
-	private ProfileServiceProxy profileServiceProxy;
+	private BookService bookService;
+	private ProfileService profileService;
 	private InventoryUpdatesProducer inventoryUpdatesProducer;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(InventoryController.class);
 	
 	@Autowired
 	public InventoryController(InventoryRepository repository,
-			BookServiceProxy bookServiceProxy,
-			ProfileServiceProxy profileServiceProxy,
+			BookService bookService,
+			ProfileService profileService,
 			InventoryUpdatesProducer inventoryUpdatesProducer) {
 		this.repository = repository;
-		this.bookServiceProxy = bookServiceProxy;
-		this.profileServiceProxy = profileServiceProxy;
+		this.bookService = bookService;
+		this.profileService = profileService;
 		this.inventoryUpdatesProducer = inventoryUpdatesProducer;
 	}
 	
@@ -57,7 +58,11 @@ public class InventoryController {
 	public Inventory upsertInventory(@RequestBody Inventory inventory, 
 			@PathVariable("sellerId")Long sellerId, @PathVariable("isbn") UUID isbn) {
 
-		if( !(isValidBook(isbn) && isValidSeller(sellerId)) ) {
+		if(!isValidBook(isbn)) {
+			throw new RuntimeException("Book with isbn ["+isbn+"] not found");
+		}
+		
+		if(!isValidSeller(sellerId)) {
 			throw new RuntimeException("Seller with id ["+sellerId+"] is not a valid seller");
 		}
 		
@@ -73,9 +78,9 @@ public class InventoryController {
 	}
 
 	private boolean isValidSeller(Long sellerId) {
-		User user = profileServiceProxy.findByUserId(sellerId);
+		User user = profileService.findByUserId(sellerId);
 		
-		if(user == null || (user.getUserType() != UserType.SELLER)) {
+		if(user == null || user.getId() == null || user.getId() <= 0 || (user.getUserType() != UserType.SELLER)) {
 			return false;
 		}
 		
@@ -83,7 +88,8 @@ public class InventoryController {
 	}
 
 	private boolean isValidBook(UUID isbn) {
-		return bookServiceProxy.findBookByIsbn(isbn) != null;
+		Book book = bookService.findBookByIsbn(isbn);
+		return  (book != null && book.getMasterBookId() != null && book.getMasterBookId() > 0);
 	}
 
 	@RequestMapping(value = "/sellerId/{sellerId}/isbn/{isbn}", method = RequestMethod.GET)

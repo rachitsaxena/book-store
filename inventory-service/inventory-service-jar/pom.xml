@@ -34,6 +34,16 @@
 		</dependency>
 		<dependency>
 			<groupId>com.rachit.bookstore</groupId>
+			<artifactId>book-service-entities</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.rachit.bookstore</groupId>
+			<artifactId>profile-service-entities</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.rachit.bookstore</groupId>
 			<artifactId>book-store-commons</artifactId>
 			<version>${project.version}</version>
 		</dependency>

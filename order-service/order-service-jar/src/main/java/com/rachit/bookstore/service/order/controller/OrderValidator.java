@@ -84,7 +84,7 @@ public class OrderValidator {
 		}
 		
 		Inventory inventory = inventoryService.getInventory(sellerId, isbn);
-		if(inventory == null || inventory.getId() <= 0 || inventory.getSkus() == null || inventory.getSkus().isEmpty()) {
+		if(inventory == null || inventory.getId() == null || inventory.getId() <= 0 || inventory.getSkus() == null || inventory.getSkus().isEmpty()) {
 			String msg = "Inventory Information not available or Seller do not have sufficient stock. [Inventory Empty]";
 			LOGGER.error(msg);
 			throw new RuntimeException(msg);

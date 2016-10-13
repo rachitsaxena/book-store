@@ -15,6 +15,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.rachit.bookstore.service.book.entity.Book;
 import com.rachit.bookstore.service.book.repository.BookRepository;
@@ -25,6 +26,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaClient
 @EnableSwagger2
 @EnableRabbit
+@CrossOrigin
 public class BookServiceApplication implements CommandLineRunner, RabbitListenerConfigurer {
 
 	@Autowired 
