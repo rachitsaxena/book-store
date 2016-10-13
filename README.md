@@ -9,7 +9,7 @@ Book Store is an application developed as a POC using Spring boot based microser
 - Place orders for a selected book.
 
 
-The aim of this application is not to provide complete working solution as online retail stores. Instead the aim of cover different features offered by Spring Boot and Spring Cloud. The tech stack used to develop these microservices are as following:
+The aim of this application is not to provide complete working solution as online retail stores. Instead the aim is to cover different features offered by Spring Boot and Spring Cloud. The tech stack used to develop these microservices are as following:
 
 - Spring Boot
 - Spring Cloud 
