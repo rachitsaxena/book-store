@@ -3,7 +3,7 @@
 	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
 	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
 	
-	<property name="spring.application.name" value="book-service" />
+	<property name="spring.application.name" value="order-service" />
 	<property name="CONSOLE_LOG_PATTERN" 
 	  value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${spring.application.name}] [trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-}] [%15.15t] %-40.40logger{39}: %m%n" />
 	
