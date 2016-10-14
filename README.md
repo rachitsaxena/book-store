@@ -8,6 +8,9 @@ Book Store is an application developed as a POC using Spring boot based microser
 - Maintain a consolidated view in NoSQL (MongoDB) to search books and see their availibility by sellers.
 - Place orders for a selected book.
 
+At high level, the design of application looks as below. As this is just a POC, all the services may not be functional (For example, review-serivce, loyalty-service, logistic-service and notification-service). If time permits, these services also will be completed.
+
+  ![Alt text](/design-documents/HLD.png?raw=true "Optional Title")
 
 The aim of this application is not to provide complete working solution as online retail stores. Instead the aim is to cover different features offered by Spring Boot and Spring Cloud. The tech stack used to develop these microservices are as following:
 
@@ -126,5 +129,5 @@ The aim of this application is not to provide complete working solution as onlin
     ```
   - This should start and register all the services with eureka.
   - Once services are started successfully, the eureka server console will look like this:
-  
+
   ![Alt text](/supporting-files/screenshots/Eureka-Services-Running.png?raw=true "Optional Title")
