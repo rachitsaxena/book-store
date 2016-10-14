@@ -91,9 +91,13 @@ The aim of this application is not to provide complete working solution as onlin
   - Got to individual services directories and hit the following command in respective directoires to build docker images:
     ```
     docker build –t book-service:1.0 .
+    
     docker build –t inventory-service:1.0 .
+    
     docker build –t order-service:1.0 .
+    
     docker build –t profile-service:1.0 .
+    
     docker build –t search-service:1.0 .
     ```  
 
