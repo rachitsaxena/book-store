@@ -61,9 +61,15 @@ The aim of this application is not to provide complete working solution as onlin
 
 ## starting the services
 - Start Config-server
-  - Go to directory book-store/config-server and hit <i>'mvn spring-boot:run'</i> command
+  - Go to directory book-store/config-server and hit 
+    ```
+     mvn spring-boot:run
+    ```
 - Start Eureka-server
-  - Go to directory book-store/eureka-server and hit <i>'mvn spring-boot:run'</i> command
+  - Go to directory book-store/eureka-server and hit 
+    ```
+     mvn spring-boot:run
+    ```
 - Start microservices
   - Find IP of local linux box (let's say its 192.168.0.102).
   - Update IP addresses in all bootstrap.properites (<xxx-service>/<xxx-service-jar>/src/main/resources/bootstrap.properites) for property: 
@@ -87,7 +93,11 @@ The aim of this application is not to provide complete working solution as onlin
       ```
     - Commit all *-service.properites files to local git reposiotry.
   - With these configuration changes, we are done with pointing microservices to config-server and eureka-server running locally without docker. Actually, these properties should be parameterized. I will make these properties configurable shortly.
-  - Next step is to start the microservices. Start docker daemon process and follow these steps:
+  - Next step is to start the microservices. Start docker daemon process.
+  - Go to book-store directory and hit following command:
+    ```
+    mvn clean install
+    ```
   - Got to individual services directories and hit the following command in respective directoires to build docker images:
     ```
     docker build –t book-service:1.0 .
