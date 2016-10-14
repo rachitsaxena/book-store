@@ -68,7 +68,7 @@ The aim of this application is not to provide complete working solution as onlin
   - Find IP of local linux box (let's say its 192.168.0.102).
   - Update IP addresses in all bootstrap.properites (<xxx-service>/<xxx-service-jar>/src/main/resources/bootstrap.properites) for property: 
   ```
-  spring.cloud.config.uri=http://192.168.0.101:8888
+  spring.cloud.config.uri=http://192.168.0.102:8888
   ```
   - In the same way,
     - clone this repository (https://github.com/rachitsaxena/book-store-cloud-configs) 
