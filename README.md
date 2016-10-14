@@ -90,20 +90,20 @@ The aim of this application is not to provide complete working solution as onlin
   - Next step is to start the microservices. Start docker daemon process and follow these steps:
   - Got to individual services directories and hit the following command in respective directoires to build docker images:
     ```
-    - docker build –t book-service:1.0 .
-    - docker build –t inventory-service:1.0 .
-    - docker build –t order-service:1.0 .
-    - docker build –t profile-service:1.0 .
-    - docker build –t search-service:1.0 .
+    docker build –t book-service:1.0 .
+    docker build –t inventory-service:1.0 .
+    docker build –t order-service:1.0 .
+    docker build –t profile-service:1.0 .
+    docker build –t search-service:1.0 .
     ```  
 
   - Check if all the images are created with command 'docker images’
   - Run the images to start the services:
     ```
-    - docker run --net host -p 9010:9010 -t profile-service:1.0
-    - docker run --net host -p 8005:8005 -t search-service:1.0
-    - docker run --net host -p 8011:8011 -t order-service:1.0
-    - docker run --net host -p 8101:8101 -t book-service:1.0
-    - docker run --net host -p 9501:9501 -t inventory-service:1.0
+    docker run --net host -p 9010:9010 -t profile-service:1.0
+    docker run --net host -p 8005:8005 -t search-service:1.0
+    docker run --net host -p 8011:8011 -t order-service:1.0
+    docker run --net host -p 8101:8101 -t book-service:1.0
+    docker run --net host -p 9501:9501 -t inventory-service:1.0
     ```
   - This should start and register all the services with eureka.
