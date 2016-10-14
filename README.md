@@ -125,3 +125,6 @@ The aim of this application is not to provide complete working solution as onlin
     docker run --net host -p 9501:9501 -t inventory-service:1.0
     ```
   - This should start and register all the services with eureka.
+  - Once services are started successfully, the eureka server console will look like this:
+  
+  ![Alt text](/supporting-files/screenshots/Eureka-Services-Running.png?raw=true "Optional Title")
