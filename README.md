@@ -60,10 +60,44 @@ The aim of this application is not to provide complete working solution as onlin
 - hystrix-dashboard : 9020
 
 ## starting the services
-### Start Config-server
-- Go to directory book-store/config-server and hit 'mvn spring-boot:run command'
-
-
+- Start Config-server
+  - Go to directory book-store/config-server and hit <i>'mvn spring-boot:run'</i> command
+- Start Eureka-server
+  - Go to directory book-store/eureka-server and hit <i>'mvn spring-boot:run'</i> command
+- Start microservices
+  - Find IP of local linux box (let's say its 192.168.0.102).
+  - Update IP addresses in all bootstrap.properites (<xxx-service>/<xxx-service-jar>/src/main/resources/bootstrap.properites) for property: <i>spring.cloud.config.uri=http://192.168.0.101:8888</i>
+  - In the same way,
+    - clone this repository (https://github.com/rachitsaxena/book-store-cloud-configs) 
+    - create a local git repository
+    - Copy all the files to local git repository and edit following property 
+      <code>
+        spring.rabbitmq.host=192.168.0.102
+        spring.rabbitmq.port=5672
+        spring.rabbitmq.username=test
+        spring.rabbitmq.password=test
+        eureka.client.serviceUrl.defaultZone=http://192.168.0.102:8761/eureka
+      </code>
+    - Commit all *-service.properites files to local git reposiotry.
+  - With these configuration changes, we are done with pointing microservices to config-server and eureka-server running locally without docker. Actually, these properties should be parameterized. I will make these properties configurable shortly.
+  - Next step is to start the microservices. Start docker daemon process and issue following commands:
+    - 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
