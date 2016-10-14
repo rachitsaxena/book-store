@@ -52,3 +52,5 @@ The aim of this application is not to provide complete working solution as onlin
   - 127.0.0.1       searchservicelocal
 
 
+## Notes
+- RabbitMQ configuration file path: /usr/local/etc/rabbitmq/rabbitmq.config
