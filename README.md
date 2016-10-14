@@ -38,7 +38,7 @@ The aim of this application is not to provide complete working solution as onlin
 ## Port Information
 - search-service : 8005
 - order-service : 8011
-- book-service : 8080
+- book-service : 8101
 - inventory-service : 9501
 - profile-service : 9010
 - hystrix-dashboard : 9020
@@ -52,3 +52,5 @@ The aim of this application is not to provide complete working solution as onlin
   - 127.0.0.1       searchservicelocal
 
 
+## Notes
+- RabbitMQ configuration file path: /usr/local/etc/rabbitmq/rabbitmq.config
