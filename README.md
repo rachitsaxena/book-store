@@ -66,39 +66,37 @@ The aim of this application is not to provide complete working solution as onlin
   - Go to directory book-store/eureka-server and hit <i>'mvn spring-boot:run'</i> command
 - Start microservices
   - Find IP of local linux box (let's say its 192.168.0.102).
-  - Update IP addresses in all bootstrap.properites (<xxx-service>/<xxx-service-jar>/src/main/resources/bootstrap.properites) for property: <i>spring.cloud.config.uri=http://192.168.0.101:8888</i>
+  - Update IP addresses in all bootstrap.properites (<xxx-service>/<xxx-service-jar>/src/main/resources/bootstrap.properites) for property: ```spring.cloud.config.uri=http://192.168.0.101:8888```
   - In the same way,
     - clone this repository (https://github.com/rachitsaxena/book-store-cloud-configs) 
     - create a local git repository
     - Copy all the files to local git repository and edit following property 
-      <code>
-        spring.rabbitmq.host=192.168.0.102
-        spring.rabbitmq.port=5672
-        spring.rabbitmq.username=test
-        spring.rabbitmq.password=test
-        eureka.client.serviceUrl.defaultZone=http://192.168.0.102:8761/eureka
-      </code>
+      ```
+      spring.rabbitmq.host=192.168.0.102
+      
+      spring.rabbitmq.port=5672
+      
+      spring.rabbitmq.username=test
+      
+      spring.rabbitmq.password=test
+      
+      eureka.client.serviceUrl.defaultZone=http://192.168.0.102:8761/eureka
+      ```
     - Commit all *-service.properites files to local git reposiotry.
   - With these configuration changes, we are done with pointing microservices to config-server and eureka-server running locally without docker. Actually, these properties should be parameterized. I will make these properties configurable shortly.
-  - Next step is to start the microservices. Start docker daemon process and issue following commands:
-    - 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  - Next step is to start the microservices. Start docker daemon process and follow these steps:
+  - Got to individual services directories and hit the following command in respective directoires to build docker images:
+    - docker build –t book-service:1.0 .
+    - docker build –t inventory-service:1.0 .
+    - docker build –t order-service:1.0 .
+    - docker build –t profile-service:1.0 .
+    - docker build –t search-service:1.0 .
 
-
-
-
+  - Check if all the images are created with command 'docker images’
+  - Run the images to start the services:
+    - docker run --net host -p 9010:9010 -t profile-service:1.0
+    - docker run --net host -p 8005:8005 -t search-service:1.0
+    - docker run --net host -p 8011:8011 -t order-service:1.0
+    - docker run --net host -p 8101:8101 -t book-service:1.0
+    - docker run --net host -p 9501:9501 -t inventory-service:1.0
+  - This should start and register all the services with eureka.
