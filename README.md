@@ -26,13 +26,22 @@ The aim of this application is not to provide complete working solution as onlin
 - H2
 - More to be added 
 
+# Setup
+## Create host entries
+- Following entries are added to /etc/hosts. These entries are required when running services on local. Turnbine has limitation of one hostname per service.
+  - 127.0.0.1       bookservicelocal
+  - 127.0.0.1       inventoryservicelocal
+  - 127.0.0.1       profileservicelocal
+  - 127.0.0.1       orderservicelocal
+  - 127.0.0.1       searchservicelocal
+
 ## Before starting services, start following components:
 - Zookeeper
   - ./bin/zookeeper-server-start.sh config/zookeeper.properties
 - Kafka
   - ./bin/kafka-server-start.sh config/server.properties
 - RabbitMQ
-  - sudo rabbitmq-server
+  - sudo rabbitmq-server (Copy config file from supporting-files/rabbitmq.config to /usr/local/etc/rabbitmq/rabbitmq.config)
 - MongoDB
   - sudo ./bin/mongod
 - ElasticSearch
@@ -50,14 +59,12 @@ The aim of this application is not to provide complete working solution as onlin
 - profile-service : 9010
 - hystrix-dashboard : 9020
 
-## To run these applications
-- Following entries are added to /etc/hosts. These entries are required when running services on local. Turnbine has limitation of one hostname per service.
-  - 127.0.0.1       bookservicelocal
-  - 127.0.0.1       inventoryservicelocal
-  - 127.0.0.1       profileservicelocal
-  - 127.0.0.1       orderservicelocal
-  - 127.0.0.1       searchservicelocal
+## starting the services
+### Start Config-server
+- Go to directory book-store/config-server and hit 'mvn spring-boot:run command'
 
 
-## Notes
-- RabbitMQ configuration file path: /usr/local/etc/rabbitmq/rabbitmq.config
+
+
+
+
