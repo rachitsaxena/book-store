@@ -28,12 +28,19 @@ The aim of this application is not to provide complete working solution as onlin
 
 ## Before starting services, start following components:
 - Zookeeper
+  - ./bin/zookeeper-server-start.sh config/zookeeper.properties
 - Kafka
+  - ./bin/kafka-server-start.sh config/server.properties
 - RabbitMQ
+  - sudo rabbitmq-server
 - MongoDB
-- Logstash
+  - sudo ./bin/mongod
 - ElasticSearch
+  - ./bin/elasticsearch
+- Logstash
+  - ./bin/logstash -f logstash.conf
 - Kibana
+  - ./bin/kibana
 
 ## Port Information
 - search-service : 8005
